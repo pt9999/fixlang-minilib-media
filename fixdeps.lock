@@ -97,7 +97,7 @@ path = ".fixlang/deps/minilib-xml_0.1.0"
 
 [dependencies.git]
 repo = "https://github.com/pt9999/fixlang-minilib-xml.git"
-rev = "7663ad2218ca9051e6ea5132cb11b8a86193c962"
+rev = "70ba9453bd8c4a8d0abf1651e0516bb58b4c12f5"
 
 [[dependencies]]
 name = "minilib-text"
