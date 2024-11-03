@@ -44,7 +44,7 @@ get = |index, image| (
 
 set: I64 -> U8 -> Image -> Image;
 set = |index, value, image| (
-    image.mod_data(set(i, value))
+    image.mod_data(set(index, value))
 );
 
 get_rgb: I64 -> Image -> (U8, U8, U8);
