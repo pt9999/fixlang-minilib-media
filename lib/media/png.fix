@@ -88,15 +88,15 @@ namespace PngImageIO {
         let convert_to_8bit = if convert_to_8bit { 1_I32 } else { 0_I32 };
         let colormap = nullptr;
         let res =
-            png_imageio.@data.borrow_ptr(|p_png_imageio|
-              filepath.borrow_c_str(|p_filepath|
-                buffer.borrow_ptr(|p_buffer|
-                    FFI_CALL[I32 png_image_write_to_file(Ptr, Ptr, I32, Ptr, I32, Ptr),
+            *png_imageio.@data.@array.borrow_ptr_io(|p_png_imageio|
+              filepath.borrow_c_str_io(|p_filepath|
+                buffer.borrow_ptr_io(|p_buffer|
+                    FFI_CALL_IO[I32 png_image_write_to_file(Ptr, Ptr, I32, Ptr, I32, Ptr),
                         p_png_imageio, p_filepath, convert_to_8bit,
                         p_buffer, row_stride.to_I32, colormap]
                 )
               )
-            );
+            ).lift;
         png_imageio._check_warning_or_error("write_to_file", res)
     );
 
@@ -126,18 +126,18 @@ namespace PngImageIO {
         let convert_to_8bit = if convert_to_8bit { 1_I32 } else { 0_I32 };
         let colormap = nullptr;
         let res =
-            png_imageio.@data.borrow_ptr(|p_png_imageio|
-              output.borrow_ptr(|p_output|
-                output_size.borrow_ptr(|p_output_size|
-                  buffer.borrow_ptr(|p_buffer|
-                    FFI_CALL[I32 png_image_write_to_memory(Ptr, Ptr, Ptr, I32, Ptr, I32, Ptr),
+            *png_imageio.@data.@array.borrow_ptr_io(|p_png_imageio|
+              output.borrow_ptr_io(|p_output|
+                output_size.borrow_ptr_io(|p_output_size|
+                  buffer.borrow_ptr_io(|p_buffer|
+                    FFI_CALL_IO[I32 png_image_write_to_memory(Ptr, Ptr, Ptr, I32, Ptr, I32, Ptr),
                         p_png_imageio, p_output, p_output_size, convert_to_8bit,
                         p_buffer, row_stride.to_I32, colormap]
                   )
                 )
               )
-            );
-        let _ = *png_imageio._check_warning_or_error("write_to_memory", res);
+            ).lift;
+        png_imageio._check_warning_or_error("write_to_memory", res);;
         pure $ output.get_sub(0, output_size.@(0).to_I64)
     );
 
