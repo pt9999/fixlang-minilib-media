@@ -14,8 +14,11 @@ files = [
 opt_level = "separated"
 files = [
     "tests/test.fix",
+    "tests/media/image_test.fix",
+    "tests/media/png_test.fix",
     "tests/media/svg_test.fix",
 ]
+dynamic_links = ["png"]
 
 [[dependencies]]
 name = "minilib-common"
@@ -34,3 +37,8 @@ name = "minilib-xml"
 version = "*"
 # path = "../fixlang-minilib-xml"
 git = { url = "https://github.com/pt9999/fixlang-minilib-xml.git" }
+
+[[dependencies]]
+name = "math"
+version = "*"
+git = { url = "https://github.com/tttmmmyyyy/fixlang-math.git" }

@@ -1,0 +1,88 @@
+module ImageTest;
+
+import Minilib.Media.Image;
+import Minilib.Testing.UnitTest;
+
+test_make: TestCase;
+test_make = (
+    make_table_test("test_make",
+        [
+            (101, 201, 1, "GRAY"),
+            (102, 202, 2, "GA"),
+            (102, 202, 2, "AG"),
+            (103, 203, 3, "RGB"),
+            (103, 203, 3, "GBR"),
+            (104, 204, 4, "RGBA"),
+            (104, 204, 4, "BGRA"),
+            (104, 204, 4, "ARGB"),
+            (104, 204, 4, "ABGR"),
+        ],
+        |(width, height, channels, format)|
+        let image = Image::make(width, height, format);
+        assert_equal("width", width, image.@width);;
+        assert_equal("height", height, image.@height);;
+        assert_equal("channels", channels, image.@channels);;
+        assert_equal("format", format, image.@format);;
+        assert_equal("data.size", width * height * channels, image.@data.get_size);;
+        pure()
+    )
+);
+
+test_calc_index: TestCase;
+test_calc_index = (
+    make_table_test("test_calc_index",
+        [
+            (333, 444, 1, "GRAY", 11, 22, 0, (333 * 22 + 11) * 1 + 0),
+            (555, 666, 3, "RGB", 33, 44, 1, (555 * 44 + 33) * 3 + 1),
+        ],
+        |(width, height, channels, format, x, y, c, expected)|
+        let image = Image::make(width, height, format);
+        let index = image.calc_index(x, y, c);
+        assert_equal("index", expected, index)
+    )
+);
+
+test_get_set: TestCase;
+test_get_set = (
+    make_table_test("test_get_set",
+        [
+            (333, 444, "GRAY", 111, 0x33_U8),
+            (555, 666, "RGB", 222, 0x44_U8),
+        ],
+        |(width, height, format, index, value)|
+        let image = Image::make(width, height, format);
+        let image = image.set(index, value);
+        assert_equal("get", value, image.get(index));;
+        assert_equal("@data.@", value, image.@data.@(index));;
+        pure()
+    )
+);
+
+test_get_set_rgb: TestCase;
+test_get_set_rgb = (
+    make_table_test("test_get_set_rgb",
+        [
+            (555, 666, "RGB", 222, (0x33_U8, 0x44_U8, 0x55_U8)),
+        ],
+        |(width, height, format, index, color)|
+        let image = Image::make(width, height, format);
+        let image = image.set_rgb(index, color);
+        assert_equal("get", color, image.get_rgb(index));;
+        assert_equal("@data.@0", color.@0, image.@data.@(index));;
+        assert_equal("@data.@1", color.@1, image.@data.@(index + 1));;
+        assert_equal("@data.@2", color.@2, image.@data.@(index + 2));;
+        pure()
+    )
+);
+
+main: IO ();
+main = (
+    [
+        test_make,
+        test_calc_index,
+        test_get_set,
+        test_get_set_rgb,
+        TestCase::empty
+    ].run_test_driver
+);
+
