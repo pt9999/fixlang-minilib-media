@@ -63,7 +63,7 @@ namespace PngImageIO {
 
     get_message: PngImageIO -> String;
     get_message = |img| (
-        img.@data.borrow_boxed(|ptr|
+        img.@data.@array.borrow_boxed(|ptr|
             String::_unsafe_from_c_str_ptr(ptr.add_offset(_def_png_image.@offsetof_message))
         )
     );
