@@ -60,9 +60,43 @@ test_write_png_file = (
     make_test("test_write_png_file") $ |_|
     let image = make_test_image();
     make_dirs(".tmp", none());;
-    let filepath = ".tmp/test.png";
+    let filepath = ".tmp/test_write_png_file.png";
     image.write_png_file(filepath);;
     assert_equal("file_exists", true, *file_exists(filepath).lift);;
+    pure()
+);
+
+test_write_png_file_invalid_filepath: TestCase;
+test_write_png_file_invalid_filepath = (
+    make_test("test_write_png_file_invalid_filepath") $ |_|
+    let image = make_test_image();
+    make_dirs(".tmp", none());;
+    let filepath = ".tmp/no-such-dir/test_write_png_file_invalid_filepath.png";
+    let res = *image.write_png_file(filepath).to_result.lift;
+    assert_equal("res", err("PngImageIO::write_to_file: res=0 ERROR: No such file or directory"), res);;
+    pure()
+);
+
+test_write_png_file_invalid_size: TestCase;
+test_write_png_file_invalid_size = (
+    make_test("test_write_png_file_invalid_size") $ |_|
+    let image = Image::make(0, 0, "RGB");
+    make_dirs(".tmp", none());;
+    let filepath = ".tmp/test_write_png_file_invalid_size.png";
+    let res = *image.write_png_file(filepath).to_result.lift;
+    assert_equal("res", err("Invalid size"), res);;
+    pure()
+);
+
+test_write_png_file_invalid_format: TestCase;
+test_write_png_file_invalid_format = (
+    make_test("test_write_png_file_invalid_format") $ |_|
+    let image = Image::make(100, 100, "RGB");
+    make_dirs(".tmp", none());;
+    let filepath = ".tmp/test_write_png_file_invalid_format.png";
+    let image = image.set_format("INVALID");
+    let res = *image.write_png_file(filepath).to_result.lift;
+    assert_equal("res", err("Invalid format: INVALID"), res);;
     pure()
 );
 
@@ -79,6 +113,9 @@ main: IO ();
 main = (
     [
         test_write_png_file,
+        test_write_png_file_invalid_filepath,
+        test_write_png_file_invalid_size,
+        test_write_png_file_invalid_format,
         test_write_png_to_memory,
         TestCase::empty
     ].run_test_driver

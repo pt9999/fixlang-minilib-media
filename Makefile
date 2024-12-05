@@ -10,4 +10,3 @@ clean:
 
 %.o : %.c
 	gcc -Wall -o $@ -c $<
-
