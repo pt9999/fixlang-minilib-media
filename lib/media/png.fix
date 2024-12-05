@@ -15,84 +15,106 @@ import Minilib.Media.Image;
 
 write_png_file: String -> Image -> IOFail ();
 write_png_file = |filepath, image| (
-    let imgio = image._to_png_imageio;
+    let imgio = *image._to_png_imageio.lift;
     let row_stride = image.@width * image.@channels;
     imgio.write_to_file(filepath, false, image.@data, row_stride)
 );
 
 write_png_to_memory: Image -> IOFail (Array U8);
 write_png_to_memory = |image| (
-    let imgio = image._to_png_imageio;
+    let imgio = *image._to_png_imageio.lift;
     let row_stride = image.@width * image.@channels;
     imgio.write_to_memory(false, image.@data, row_stride)
 );
 
-_to_png_imageio: Image -> PngImageIO;
+_to_png_imageio: Image -> IO PngImageIO;
 _to_png_imageio = |image| (
-    let imgio = PngImageIO::empty;
-    let imgio = imgio.set_width(image.@width);
-    let imgio = imgio.set_height(image.@height);
-    let imgio = imgio.set_format(PngImageIO::parse_format(image.@format));
-    imgio
+    let imgio = *PngImageIO::make;
+    imgio.set_image_size(image.@width, image.@height);;
+    imgio.set_format(PngImageIO::parse_format(image.@format));;
+    pure $ imgio
 );
 
 
 type PngImageIO = unbox struct {
-    data: ByteBuffer
+    dtor: Destructor Ptr
 };
 
 namespace PngImageIO {
 
-    empty: PngImageIO;
-    empty = (
-        let data = ByteBuffer::fill(_def_png_image.@sizeof_png_image, 0_U8, Platform::byte_order);
-        let img = PngImageIO {
-            data: data
-        };
-        img.set_version(1)
+    make: IO PngImageIO;
+    make = (
+        let pv_image: Ptr = *FFI_CALL_IO[Ptr minilib_png_create()];
+        let dtor: Destructor Ptr = Destructor::make(pv_image, |pv_image|
+            FFI_CALL_IO[() minilib_png_destroy(Ptr), pv_image];;
+            pure $ nullptr
+        );
+        pure $ PngImageIO { dtor: dtor }
     );
 
+/*
     get_width: PngImageIO -> I64;
     get_width = |img| img.@data.get_u32(_def_png_image.@offsetof_width).to_I64;
 
     get_height: PngImageIO -> I64;
     get_height = |img| img.@data.get_u32(_def_png_image.@offsetof_height).to_I64;
+*/
 
-    get_warning_or_error: PngImageIO -> I64;
-    get_warning_or_error = |img| img.@data.get_u32(_def_png_image.@offsetof_warning_or_error).to_I64;
-
-    get_message: PngImageIO -> String;
-    get_message = |img| (
-        img.@data.@array.borrow_boxed(|ptr|
-            String::_unsafe_from_c_str_ptr(ptr.add_offset(_def_png_image.@offsetof_message))
+    get_warning_or_error: PngImageIO -> IO I64;
+    get_warning_or_error = |img| (
+        img.@dtor.borrow_io(|pv_image|
+            FFI_CALL_IO[U32 minilib_png_get_warning_or_error(Ptr), pv_image]
+            .map(to_I64)
         )
     );
 
+    get_message: PngImageIO -> IO String;
+    get_message = |img| (
+        img.@dtor.borrow_io(|pv_image|
+            FFI_CALL_IO[Ptr minilib_png_get_message(Ptr), pv_image]
+            .map(_unsafe_from_c_str_ptr)
+        )
+    );
+
+/*
     set_version: I64 -> PngImageIO -> PngImageIO;
     set_version = |n, img| img.mod_data(set_u32(_def_png_image.@offsetof_version, n.to_U32));
-
+*/
+/*
     set_width: I64 -> PngImageIO -> PngImageIO;
     set_width = |n, img| img.mod_data(set_u32(_def_png_image.@offsetof_width, n.to_U32));
 
     set_height: I64 -> PngImageIO -> PngImageIO;
     set_height = |n, img| img.mod_data(set_u32(_def_png_image.@offsetof_height, n.to_U32));
+*/
+    set_image_size: I64 -> I64 -> PngImageIO -> IO ();
+    set_image_size = |width, height, img| (
+        img.@dtor.borrow_io(|pv_image|
+            FFI_CALL_IO[() minilib_png_set_size(Ptr, U32, U32), pv_image, width.to_U32, height.to_U32]
+        )
+    );
 
-    set_format: I64 -> PngImageIO -> PngImageIO;
-    set_format = |n, img| img.mod_data(set_u32(_def_png_image.@offsetof_format, n.to_U32));
+    set_format: I64 -> PngImageIO -> IO ();
+    set_format = |format, img| (
+        img.@dtor.borrow_io(|pv_image|
+            FFI_CALL_IO[() minilib_png_set_format(Ptr, U32), pv_image, format.to_U32]
+        )
+    );
 
+/*
     set_flags: I64 -> PngImageIO -> PngImageIO;
     set_flags = |n, img| img.mod_data(set_u32(_def_png_image.@offsetof_flags, n.to_U32));
-
+*/
     write_to_file: String -> Bool -> Array U8 -> I64 -> PngImageIO -> IOFail ();
     write_to_file = |filepath, convert_to_8bit, buffer, row_stride, png_imageio| (
         let convert_to_8bit = if convert_to_8bit { 1_I32 } else { 0_I32 };
         let colormap = nullptr;
         let res =
-            *png_imageio.@data.@array.borrow_boxed_io(|p_png_imageio|
+            *png_imageio.@dtor.borrow_io(|pv_image|
               filepath.borrow_c_str_io(|p_filepath|
                 buffer.borrow_boxed_io(|p_buffer|
-                    FFI_CALL_IO[I32 png_image_write_to_file(Ptr, Ptr, I32, Ptr, I32, Ptr),
-                        p_png_imageio, p_filepath, convert_to_8bit,
+                    FFI_CALL_IO[CInt minilib_png_write_to_file(Ptr, Ptr, I32, Ptr, I32, Ptr),
+                        pv_image, p_filepath, convert_to_8bit,
                         p_buffer, row_stride.to_I32, colormap]
                 )
               )
@@ -100,17 +122,17 @@ namespace PngImageIO {
         png_imageio._check_warning_or_error("write_to_file", res)
     );
 
-    _check_warning_or_error: String -> I32 -> PngImageIO -> IOFail ();
+    _check_warning_or_error: String -> CInt -> PngImageIO -> IOFail ();
     _check_warning_or_error = |func_name, res, png_imageio| (
         let result = "PngImageIO::" + func_name + ": res=" + res.to_string;
-        let warning_or_error = png_imageio.get_warning_or_error;
-        let message = png_imageio.get_message;
+        let warning_or_error = *png_imageio.get_warning_or_error.lift;
+        let message = *png_imageio.get_message.lift;
         if warning_or_error == 2 {  // error
             throw $ result + " ERROR: " + message
         };
         if warning_or_error == 1 {  // warning
             eprintln(result + " WARNING: " + message).lift
-        } else if res == 1_I32 {
+        } else if res.to_I64 == 1 {
             // png_image_write_to_file() returns 1 on success
             pure()
         } else {
@@ -126,12 +148,12 @@ namespace PngImageIO {
         let convert_to_8bit = if convert_to_8bit { 1_I32 } else { 0_I32 };
         let colormap = nullptr;
         let res =
-            *png_imageio.@data.@array.borrow_boxed_io(|p_png_imageio|
+            *png_imageio.@dtor.borrow_io(|pv_image|
               output.borrow_boxed_io(|p_output|
                 output_size.borrow_boxed_io(|p_output_size|
                   buffer.borrow_boxed_io(|p_buffer|
-                    FFI_CALL_IO[I32 png_image_write_to_memory(Ptr, Ptr, Ptr, I32, Ptr, I32, Ptr),
-                        p_png_imageio, p_output, p_output_size, convert_to_8bit,
+                    FFI_CALL_IO[CInt minilib_png_write_to_memory(Ptr, Ptr, Ptr, I32, Ptr, I32, Ptr),
+                        pv_image, p_output, p_output_size, convert_to_8bit,
                         p_buffer, row_stride.to_I32, colormap]
                   )
                 )
@@ -171,6 +193,7 @@ namespace PngImageIO {
         0
     );
 
+/*
     // `png_image` structure layout
     type DefPngImage = unbox struct {
         offsetof_opaque: I64,
@@ -198,5 +221,6 @@ namespace PngImageIO {
         offsetof_message: 36,
         sizeof_png_image: 104
     };
+*/
 }
 
