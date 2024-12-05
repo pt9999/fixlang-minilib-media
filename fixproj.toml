@@ -11,6 +11,9 @@ files = [
     "lib/media/png.fix",
     "lib/media/svg.fix",
 ]
+objects = ["lib_png.o"]
+preliminary_commands = [["make", "lib_png.o"]]
+dynamic_links = ["png"]
 
 [build.test]
 opt_level = "separated"
@@ -20,7 +23,6 @@ files = [
     "tests/media/png_test.fix",
     "tests/media/svg_test.fix",
 ]
-dynamic_links = ["png"]
 
 [[dependencies]]
 name = "minilib-common"
