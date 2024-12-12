@@ -33,10 +33,6 @@ NOTE: Currently only writing is supported. Reading is not supported yet.
 
 ## `namespace Minilib.Media.Png::PngImageIO`
 
-### `@dtor : Minilib.Media.Png::PngImageIO -> Std::FFI::Destructor Std::Ptr`
-
-Retrieves the field `dtor` from a value of `PngImageIO`.
-
 ### `_PNG_FORMAT_FLAG_AFIRST : Std::I64`
 
 ### `_PNG_FORMAT_FLAG_ALPHA : Std::I64`
@@ -53,25 +49,13 @@ Retrieves the field `dtor` from a value of `PngImageIO`.
 
 ### `_check_warning_or_error : Std::String -> Std::I32 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
 
-### `act_dtor : [f : Std::Functor] (Std::FFI::Destructor Std::Ptr -> f (Std::FFI::Destructor Std::Ptr)) -> Minilib.Media.Png::PngImageIO -> f Minilib.Media.Png::PngImageIO`
-
-Updates a value of `PngImageIO` by applying a functorial action to field `dtor`.
-
 ### `get_message : Minilib.Media.Png::PngImageIO -> Std::IO::IOFail Std::String`
 
 ### `get_warning_or_error : Minilib.Media.Png::PngImageIO -> Std::IO::IOFail Std::I64`
 
 ### `make : Std::IO::IOFail Minilib.Media.Png::PngImageIO`
 
-### `mod_dtor : (Std::FFI::Destructor Std::Ptr -> Std::FFI::Destructor Std::Ptr) -> Minilib.Media.Png::PngImageIO -> Minilib.Media.Png::PngImageIO`
-
-Updates a value of `PngImageIO` by applying a function to field `dtor`.
-
 ### `parse_format : Std::String -> Std::Result Std::String Std::I64`
-
-### `set_dtor : Std::FFI::Destructor Std::Ptr -> Minilib.Media.Png::PngImageIO -> Minilib.Media.Png::PngImageIO`
-
-Updates a value of `PngImageIO` by setting field `dtor` to a specified one.
 
 ### `set_format : Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
 

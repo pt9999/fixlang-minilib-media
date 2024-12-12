@@ -58,17 +58,9 @@ For example, `100` -> `"100"`.
 
 ## `namespace Minilib.Media.Svg::PathData`
 
-### `@data : Minilib.Media.Svg::PathData -> Std::String`
-
-Retrieves the field `data` from a value of `PathData`.
-
 ### `_append : Std::String -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
 
 Appends an string to PathData.
-
-### `act_data : [f : Std::Functor] (Std::String -> f Std::String) -> Minilib.Media.Svg::PathData -> f Minilib.Media.Svg::PathData`
-
-Updates a value of `PathData` by applying a functorial action to field `data`.
 
 ### `arcto : [a : Minilib.Media.Svg::SvgNum, b : Minilib.Media.Svg::SvgNum, r : Minilib.Media.Svg::SvgNum] a -> a -> r -> b -> b -> a -> a -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
 
@@ -97,10 +89,6 @@ Coordinates are absolute.
 which becomes the new current point.
 Coordinates are absolute.
 
-### `mod_data : (Std::String -> Std::String) -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
-
-Updates a value of `PathData` by applying a function to field `data`.
-
 ### `moveto : [a : Minilib.Media.Svg::SvgNum] a -> a -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
 
 `pathdata.moveto(x, y)` starts a new sub-path at the given `(x,y)` coordinates.
@@ -127,10 +115,6 @@ Same as `moveto` but coordinates are relative.
 ### `scurveto : [a : Minilib.Media.Svg::SvgNum] a -> a -> a -> a -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
 
 Shorthand/smooth version of `curveto`.
-
-### `set_data : Std::String -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
-
-Updates a value of `PathData` by setting field `data` to a specified one.
 
 ### `squadto : [a : Minilib.Media.Svg::SvgNum] a -> a -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
 
