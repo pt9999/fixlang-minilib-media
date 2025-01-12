@@ -5,7 +5,7 @@ authors = ["pt9999"]
 license = "MIT"
 
 [build]
-opt_level = "separated"
+opt_level = "basic"
 files = [
     "lib/media/image.fix",
     "lib/media/png.fix",
@@ -16,7 +16,7 @@ preliminary_commands = [["make", "lib_png.o"]]
 dynamic_links = ["png"]
 
 [build.test]
-opt_level = "separated"
+opt_level = "basic"
 files = [
     "tests/test.fix",
     "tests/media/image_test.fix",
