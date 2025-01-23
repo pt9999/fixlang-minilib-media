@@ -1,13 +1,22 @@
 proj_file_hash = "ecee6d8fb14130282d132652b77a203a"
 
 [[dependencies]]
+name = "math"
+version = "1.0.0"
+path = ".fixlang/deps/math_1.0.0"
+
+[dependencies.git]
+repo = "https://github.com/tttmmmyyyy/fixlang-math.git"
+rev = "6b1c3810d49d0291c2a800f783be38138cf4381d"
+
+[[dependencies]]
 name = "minilib-xml"
-version = "0.1.6"
-path = ".fixlang/deps/minilib-xml_0.1.6"
+version = "0.1.7"
+path = ".fixlang/deps/minilib-xml_0.1.7"
 
 [dependencies.git]
 repo = "https://github.com/pt9999/fixlang-minilib-xml.git"
-rev = "7876a20ffdb8537850c1f14cfadc5352bd2f5204"
+rev = "d3a5bdd5360b6519c92ef4a75b2de89a585ec9e7"
 
 [[dependencies]]
 name = "minilib-text"
@@ -55,22 +64,13 @@ repo = "https://github.com/pt9999/fixlang-minilib-binary.git"
 rev = "8971203f759a4a78c51930affdc463feb16053ea"
 
 [[dependencies]]
-name = "math"
-version = "1.0.0"
-path = ".fixlang/deps/math_1.0.0"
-
-[dependencies.git]
-repo = "https://github.com/tttmmmyyyy/fixlang-math.git"
-rev = "6b1c3810d49d0291c2a800f783be38138cf4381d"
-
-[[dependencies]]
 name = "minilib-io"
-version = "0.3.6"
-path = ".fixlang/deps/minilib-io_0.3.6"
+version = "0.4.0"
+path = ".fixlang/deps/minilib-io_0.4.0"
 
 [dependencies.git]
 repo = "https://github.com/pt9999/fixlang-minilib-io.git"
-rev = "4b531d2cb11d878e1b8bc58e1c8fae12a1895d9a"
+rev = "8486013e006735e91053c09a8900fb50367c7528"
 
 [[dependencies]]
 name = "hashmap"
