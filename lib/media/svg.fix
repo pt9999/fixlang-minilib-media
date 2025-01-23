@@ -103,7 +103,7 @@ namespace PathData {
     // `pathdata.closepath` ends the current sub-path by connecting it back to its initial point.
     closepath: PathData -> PathData;
     closepath = _append("Z");
-    
+
     // `pathdata.curveto(x1, y1, x2, y2, x, y)` draws a cubic Bézier curve
     // from the current point to `(x,y)` using `(x1,y1)` as the control point
     // at the beginning of the curve and `(x2,y2)` as the control point at the end of the curve.
@@ -279,7 +279,7 @@ namespace Svg {
     write_file: String -> XmlElement -> IOFail ();
     write_file = |filepath, svg| (
         let doc = XmlDocument::make(svg);
-        with_file(Path::parse(filepath).as_some, "w", |fh|
+        with_file(filepath, "w", |fh|
             write_string(fh, doc.to_string)
         )
     );
