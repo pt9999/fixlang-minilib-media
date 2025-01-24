@@ -47,7 +47,7 @@ NOTE: Currently only writing is supported. Reading is not supported yet.
 
 ### `_PNG_FORMAT_FLAG_LINEAR : Std::I64`
 
-### `_check_warning_or_error : Std::String -> Std::I32 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+### `_check_warning_or_error : Std::String -> Std::FFI::CInt -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
 
 ### `get_message : Minilib.Media.Png::PngImageIO -> Std::IO::IOFail Std::String`
 
@@ -55,7 +55,7 @@ NOTE: Currently only writing is supported. Reading is not supported yet.
 
 ### `make : Std::IO::IOFail Minilib.Media.Png::PngImageIO`
 
-### `parse_format : Std::String -> Std::Result Std::String Std::I64`
+### `parse_format : Std::String -> Std::Result Std::ErrMsg Std::I64`
 
 ### `set_format : Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
 
