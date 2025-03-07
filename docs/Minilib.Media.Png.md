@@ -1,4 +1,6 @@
-# `module Minilib.Media.Png`
+# Minilib.Media.Png
+
+Defined in minilib-media@0.5.1
 
 PNG image I/O.
 
@@ -9,58 +11,100 @@ PNG image I/O.
 
 NOTE: Currently only writing is supported. Reading is not supported yet.
 
-# Types and aliases
+## Values
 
-## `namespace Minilib.Media.Png`
+### namespace Minilib.Media.Png
 
-### `type PngImageIO = unbox struct { ...fields... }`
+#### _to_png_imageio
 
-#### field `dtor : Std::FFI::Destructor Std::Ptr`
+Type: `Minilib.Media.Image::Image -> Std::IO::IOFail Minilib.Media.Png::PngImageIO`
 
-# Traits and aliases
+#### write_png_file
 
-# Trait implementations
+Type: `Std::String -> Minilib.Media.Image::Image -> Std::IO::IOFail ()`
 
-# Values
+#### write_png_to_memory
 
-## `namespace Minilib.Media.Png`
+Type: `Minilib.Media.Image::Image -> Std::IO::IOFail (Std::Array Std::U8)`
 
-### `_to_png_imageio : Minilib.Media.Image::Image -> Std::IO::IOFail Minilib.Media.Png::PngImageIO`
+### namespace Minilib.Media.Png::PngImageIO
 
-### `write_png_file : Std::String -> Minilib.Media.Image::Image -> Std::IO::IOFail ()`
+#### _PNG_FORMAT_FLAG_AFIRST
 
-### `write_png_to_memory : Minilib.Media.Image::Image -> Std::IO::IOFail (Std::Array Std::U8)`
+Type: `Std::I64`
 
-## `namespace Minilib.Media.Png::PngImageIO`
+#### _PNG_FORMAT_FLAG_ALPHA
 
-### `_PNG_FORMAT_FLAG_AFIRST : Std::I64`
+Type: `Std::I64`
 
-### `_PNG_FORMAT_FLAG_ALPHA : Std::I64`
+#### _PNG_FORMAT_FLAG_ASSOCIATED_ALPHA
 
-### `_PNG_FORMAT_FLAG_ASSOCIATED_ALPHA : Std::I64`
+Type: `Std::I64`
 
-### `_PNG_FORMAT_FLAG_BGR : Std::I64`
+#### _PNG_FORMAT_FLAG_BGR
 
-### `_PNG_FORMAT_FLAG_COLOR : Std::I64`
+Type: `Std::I64`
 
-### `_PNG_FORMAT_FLAG_COLORMAP : Std::I64`
+#### _PNG_FORMAT_FLAG_COLOR
 
-### `_PNG_FORMAT_FLAG_LINEAR : Std::I64`
+Type: `Std::I64`
 
-### `_check_warning_or_error : Std::String -> Std::FFI::CInt -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+#### _PNG_FORMAT_FLAG_COLORMAP
 
-### `get_message : Minilib.Media.Png::PngImageIO -> Std::IO::IOFail Std::String`
+Type: `Std::I64`
 
-### `get_warning_or_error : Minilib.Media.Png::PngImageIO -> Std::IO::IOFail Std::I64`
+#### _PNG_FORMAT_FLAG_LINEAR
 
-### `make : Std::IO::IOFail Minilib.Media.Png::PngImageIO`
+Type: `Std::I64`
 
-### `parse_format : Std::String -> Std::Result Std::ErrMsg Std::I64`
+#### _check_warning_or_error
 
-### `set_format : Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+Type: `Std::String -> Std::FFI::CInt -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
 
-### `set_image_size : Std::I64 -> Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+#### get_message
 
-### `write_to_file : Std::String -> Std::Bool -> Std::Array Std::U8 -> Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+Type: `Minilib.Media.Png::PngImageIO -> Std::IO::IOFail Std::String`
 
-### `write_to_memory : Std::Bool -> Std::Array Std::U8 -> Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail (Std::Array Std::U8)`
+#### get_warning_or_error
+
+Type: `Minilib.Media.Png::PngImageIO -> Std::IO::IOFail Std::I64`
+
+#### make
+
+Type: `Std::IO::IOFail Minilib.Media.Png::PngImageIO`
+
+#### parse_format
+
+Type: `Std::String -> Std::Result Std::ErrMsg Std::I64`
+
+#### set_format
+
+Type: `Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+
+#### set_image_size
+
+Type: `Std::I64 -> Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+
+#### write_to_file
+
+Type: `Std::String -> Std::Bool -> Std::Array Std::U8 -> Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
+
+#### write_to_memory
+
+Type: `Std::Bool -> Std::Array Std::U8 -> Std::I64 -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail (Std::Array Std::U8)`
+
+## Types and aliases
+
+### namespace Minilib.Media.Png
+
+#### PngImageIO
+
+Defined as: `type PngImageIO = unbox struct { ...fields... }`
+
+##### field `dtor`
+
+Type: `Std::FFI::Destructor Std::Ptr`
+
+## Traits and aliases
+
+## Trait implementations

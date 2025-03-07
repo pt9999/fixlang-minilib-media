@@ -1,41 +1,69 @@
-# `module Minilib.Media.Image`
+# Minilib.Media.Image
+
+Defined in minilib-media@0.5.1
 
 Basic image definitions.
 
-# Types and aliases
+## Values
 
-## `namespace Minilib.Media.Image`
+### namespace Minilib.Media.Image
 
-### `type Image = unbox struct { ...fields... }`
+#### calc_channels_by_format
 
-#### field `width : Std::I64`
+Type: `Std::String -> Std::I64`
 
-#### field `height : Std::I64`
+#### calc_index
 
-#### field `channels : Std::I64`
+Type: `Std::I64 -> Std::I64 -> Std::I64 -> Minilib.Media.Image::Image -> Std::I64`
 
-#### field `format : Std::String`
+#### get
 
-#### field `data : Std::Array Std::U8`
+Type: `Std::I64 -> Minilib.Media.Image::Image -> Std::U8`
 
-# Traits and aliases
+#### get_rgb
 
-# Trait implementations
+Type: `Std::I64 -> Minilib.Media.Image::Image -> (Std::U8, Std::U8, Std::U8)`
 
-# Values
+#### make
 
-## `namespace Minilib.Media.Image`
+Type: `Std::I64 -> Std::I64 -> Std::String -> Minilib.Media.Image::Image`
 
-### `calc_channels_by_format : Std::String -> Std::I64`
+#### set
 
-### `calc_index : Std::I64 -> Std::I64 -> Std::I64 -> Minilib.Media.Image::Image -> Std::I64`
+Type: `Std::I64 -> Std::U8 -> Minilib.Media.Image::Image -> Minilib.Media.Image::Image`
 
-### `get : Std::I64 -> Minilib.Media.Image::Image -> Std::U8`
+#### set_rgb
 
-### `get_rgb : Std::I64 -> Minilib.Media.Image::Image -> (Std::U8, Std::U8, Std::U8)`
+Type: `Std::I64 -> (Std::U8, Std::U8, Std::U8) -> Minilib.Media.Image::Image -> Minilib.Media.Image::Image`
 
-### `make : Std::I64 -> Std::I64 -> Std::String -> Minilib.Media.Image::Image`
+## Types and aliases
 
-### `set : Std::I64 -> Std::U8 -> Minilib.Media.Image::Image -> Minilib.Media.Image::Image`
+### namespace Minilib.Media.Image
 
-### `set_rgb : Std::I64 -> (Std::U8, Std::U8, Std::U8) -> Minilib.Media.Image::Image -> Minilib.Media.Image::Image`
+#### Image
+
+Defined as: `type Image = unbox struct { ...fields... }`
+
+##### field `width`
+
+Type: `Std::I64`
+
+##### field `height`
+
+Type: `Std::I64`
+
+##### field `channels`
+
+Type: `Std::I64`
+
+##### field `format`
+
+Type: `Std::String`
+
+##### field `data`
+
+Type: `Std::Array Std::U8`
+
+## Traits and aliases
+
+## Trait implementations
