@@ -1,8 +1,8 @@
 # Minilib.Media.Png
 
-Defined in minilib-media@0.5.1
+Defined in minilib-media@0.5.2
 
-PNG image I/O.
+ PNG image I/O.
 
  How to use:
  1. Install PNG library. For example, run the command below.
@@ -15,10 +15,6 @@ NOTE: Currently only writing is supported. Reading is not supported yet.
 
 ### namespace Minilib.Media.Png
 
-#### _to_png_imageio
-
-Type: `Minilib.Media.Image::Image -> Std::IO::IOFail Minilib.Media.Png::PngImageIO`
-
 #### write_png_file
 
 Type: `Std::String -> Minilib.Media.Image::Image -> Std::IO::IOFail ()`
@@ -28,38 +24,6 @@ Type: `Std::String -> Minilib.Media.Image::Image -> Std::IO::IOFail ()`
 Type: `Minilib.Media.Image::Image -> Std::IO::IOFail (Std::Array Std::U8)`
 
 ### namespace Minilib.Media.Png::PngImageIO
-
-#### _PNG_FORMAT_FLAG_AFIRST
-
-Type: `Std::I64`
-
-#### _PNG_FORMAT_FLAG_ALPHA
-
-Type: `Std::I64`
-
-#### _PNG_FORMAT_FLAG_ASSOCIATED_ALPHA
-
-Type: `Std::I64`
-
-#### _PNG_FORMAT_FLAG_BGR
-
-Type: `Std::I64`
-
-#### _PNG_FORMAT_FLAG_COLOR
-
-Type: `Std::I64`
-
-#### _PNG_FORMAT_FLAG_COLORMAP
-
-Type: `Std::I64`
-
-#### _PNG_FORMAT_FLAG_LINEAR
-
-Type: `Std::I64`
-
-#### _check_warning_or_error
-
-Type: `Std::String -> Std::FFI::CInt -> Minilib.Media.Png::PngImageIO -> Std::IO::IOFail ()`
 
 #### get_message
 

@@ -1,6 +1,6 @@
 # Minilib.Media.Svg
 
-Defined in minilib-media@0.5.1
+Defined in minilib-media@0.5.2
 
 Scalable Vector Graphics (SVG) 1.1
 
@@ -9,12 +9,6 @@ This module uses `Minilib.Encoding.Xml` to handle XML.
 ## Values
 
 ### namespace Minilib.Media.Svg::PathData
-
-#### _append
-
-Type: `Std::String -> Minilib.Media.Svg::PathData -> Minilib.Media.Svg::PathData`
-
-Appends an string to PathData.
 
 #### arcto
 
@@ -197,7 +191,7 @@ Type: `[a : Minilib.Media.Svg::SvgNum] a -> Minilib.Encoding.Xml::XmlElement -> 
 
 Type: `[a : Minilib.Media.Svg::SvgNum] a -> a -> Minilib.Encoding.Xml::XmlElement`
 
-`Svg::svg(width, height)` creates a `<svg>` element.
+ `Svg::svg(width, height)` creates a `<svg>` element.
 
 #### text
 
