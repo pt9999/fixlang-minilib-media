@@ -1,6 +1,6 @@
 # Minilib.Media.Png
 
-Defined in minilib-media@0.5.2
+Defined in minilib-media@0.5.3
 
  PNG image I/O.
 
