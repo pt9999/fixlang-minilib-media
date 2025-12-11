@@ -61,7 +61,7 @@ namespace PngImageIO {
     get_message = |img| (
         img.@dtor.borrow_io(|pv_image|
             FFI_CALL_IO[Ptr minilib_png_get_message(Ptr), pv_image]
-            .map(_unsafe_from_c_str_ptr)
+            .map(unsafe_from_c_str_ptr)
         ).lift
     );
 
