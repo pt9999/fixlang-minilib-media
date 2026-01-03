@@ -42,10 +42,10 @@ namespace PngImageIO {
     make: IOFail PngImageIO;
     make = (
         let pv_image: Ptr = *FFI_CALL_IO[Ptr minilib_png_create()].lift;
-        let dtor: Destructor Ptr = Destructor::make(pv_image, |pv_image|
+        let dtor: Destructor Ptr = *Destructor::make(pv_image, |pv_image|
             FFI_CALL_IO[() minilib_png_destroy(Ptr), pv_image];;
             pure $ nullptr
-        );
+        ).lift;
         pure $ PngImageIO { dtor: dtor }
     );
 
