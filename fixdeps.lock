@@ -11,12 +11,12 @@ rev = "663bdee5f5ee2824e9e139cfdb097d6e56a4b1bb"
 
 [[dependencies]]
 name = "minilib-xml"
-version = "0.5.4"
-path = ".fixlang/deps/minilib-xml_0.5.4"
+version = "0.5.5"
+path = ".fixlang/deps/minilib-xml_0.5.5"
 
 [dependencies.git]
 repo = "https://github.com/pt9999/fixlang-minilib-xml.git"
-rev = "4fcfb6b4fec761b9e7fa7625c72bb55d31d2235e"
+rev = "185b56d0ed4f35e9bc117aec080495d50a54cc65"
 
 [[dependencies]]
 name = "minilib-binary"
