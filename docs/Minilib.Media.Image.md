@@ -1,6 +1,6 @@
 # Minilib.Media.Image
 
-Defined in minilib-media@0.5.8
+Defined in minilib-media@0.5.9
 
 Basic image definitions.
 
