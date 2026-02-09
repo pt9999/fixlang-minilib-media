@@ -1,6 +1,6 @@
 # Minilib.Media.Svg
 
-Defined in minilib-media@0.5.11
+Defined in minilib-media@0.6.0
 
 Scalable Vector Graphics (SVG) 1.1
 
