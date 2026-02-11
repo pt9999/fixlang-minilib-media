@@ -1,3 +1,7 @@
+## 0.6.1
+### Fixed
+- Fixed a potential dangling pointer. (`unsafe_from_c_str_ptr` -> `unsafe_from_c_str_ptr_io`)
+
 ## 0.6.0
 ### Changed
 - fixproj.toml:

@@ -60,8 +60,8 @@ namespace PngImageIO {
     get_message: PngImageIO -> IOFail String;
     get_message = |img| (
         img.@dtor.borrow_io(|pv_image|
-            FFI_CALL_IO[Ptr minilib_png_get_message(Ptr), pv_image]
-            .map(unsafe_from_c_str_ptr)
+            let p_message = *FFI_CALL_IO[Ptr minilib_png_get_message(Ptr), pv_image];
+            p_message.unsafe_from_c_str_ptr_io
         ).lift
     );
 
