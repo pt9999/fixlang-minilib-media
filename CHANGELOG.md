@@ -1,3 +1,7 @@
+## 0.6.2
+### Changed
+- Removed indirect dependencies.
+
 ## 0.6.1
 ### Fixed
 - Fixed a potential dangling pointer. (`unsafe_from_c_str_ptr` -> `unsafe_from_c_str_ptr_io`)

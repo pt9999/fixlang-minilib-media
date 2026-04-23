@@ -31,20 +31,14 @@ version = "1.2.0"
 git = { url = "https://github.com/tttmmmyyyy/fixlang-math.git" }
 
 [[dependencies]]
-name = "minilib-common"
-version = "0.12.0"
-# path = "../fixlang-minilib-common"
-git = { url = "https://github.com/pt9999/fixlang-minilib-common.git" }
-
-[[dependencies]]
 name = "minilib-xml"
-version = "0.6.0"
+version = "0.6.2"
 # path = "../fixlang-minilib-xml"
 git = { url = "https://github.com/pt9999/fixlang-minilib-xml.git" }
 
 [[test_dependencies]]
 name = "minilib-io"
-version = "0.8.0"
+version = "0.8.3"
 # path = "../fixlang-minilib-io"
 git = { url = "https://github.com/pt9999/fixlang-minilib-io.git" }
 
