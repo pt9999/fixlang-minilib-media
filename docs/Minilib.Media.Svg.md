@@ -1,6 +1,6 @@
 # Minilib.Media.Svg
 
-Defined in minilib-media@0.6.1
+Defined in minilib-media@0.6.2
 
 Scalable Vector Graphics (SVG) 1.1
 
@@ -224,6 +224,8 @@ Type: `[a : Minilib.Media.Svg::SvgNum] a -> a -> Minilib.Encoding.Xml::XmlElemen
 #### to_attr_value
 
 Type: `[a : Minilib.Media.Svg::SvgNum] a -> Std::String`
+
+Trait member of `Minilib.Media.Svg::SvgNum`
 
 Convert to an attribute value of a SVG element.
 
