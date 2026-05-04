@@ -53,7 +53,7 @@ namespace PngImageIO {
     get_warning_or_error = |img| (
         img.@dtor.borrow_io(|pv_image|
             FFI_CALL_IO[U32 minilib_png_get_warning_or_error(Ptr), pv_image]
-            .map(to_I64)
+            .map(i64)
         ).lift
     );
 
@@ -71,14 +71,14 @@ namespace PngImageIO {
             throw $ "Invalid size"
         };
         img.@dtor.borrow_io(|pv_image|
-            FFI_CALL_IO[() minilib_png_set_size(Ptr, U32, U32), pv_image, width.to_U32, height.to_U32]
+            FFI_CALL_IO[() minilib_png_set_size(Ptr, U32, U32), pv_image, width.u32, height.u32]
         ).lift
     );
 
     set_format: I64 -> PngImageIO -> IOFail ();
     set_format = |format, img| (
         img.@dtor.borrow_io(|pv_image|
-            FFI_CALL_IO[() minilib_png_set_format(Ptr, U32), pv_image, format.to_U32]
+            FFI_CALL_IO[() minilib_png_set_format(Ptr, U32), pv_image, format.u32]
         ).lift
     );
 
@@ -92,7 +92,7 @@ namespace PngImageIO {
                 buffer.borrow_boxed_io(|p_buffer|
                     FFI_CALL_IO[CInt minilib_png_write_to_file(Ptr, Ptr, I32, Ptr, I32, Ptr),
                         pv_image, p_filepath, convert_to_8bit,
-                        p_buffer, row_stride.to_I32, colormap]
+                        p_buffer, row_stride.i32, colormap]
                 )
               )
             ).lift;
@@ -109,7 +109,7 @@ namespace PngImageIO {
         };
         if warning_or_error == 1 {  // warning
             eprintln(result + " WARNING: " + message).lift
-        } else if res.to_I64 == 1 {
+        } else if res.i64 == 1 {
             // png_image_write_to_file() returns 1 on success
             pure()
         } else {
@@ -120,8 +120,8 @@ namespace PngImageIO {
 
     write_to_memory:  Bool -> Array U8 -> I64 -> PngImageIO -> IOFail (Array U8);
     write_to_memory = |convert_to_8bit, buffer, row_stride, png_imageio| (
-        let output = Array::fill(buffer.get_size * 2, 0_U8); // TODO: is it ok?
-        let output_size = Array::fill(1, output.get_size.to_U32);
+        let output = Array::fill(buffer.@size * 2, 0_U8); // TODO: is it ok?
+        let output_size = Array::fill(1, output.@size.u32);
         let convert_to_8bit = if convert_to_8bit { 1_I32 } else { 0_I32 };
         let colormap = nullptr;
         let res =
@@ -131,13 +131,13 @@ namespace PngImageIO {
                   buffer.borrow_boxed_io(|p_buffer|
                     FFI_CALL_IO[CInt minilib_png_write_to_memory(Ptr, Ptr, Ptr, I32, Ptr, I32, Ptr),
                         pv_image, p_output, p_output_size, convert_to_8bit,
-                        p_buffer, row_stride.to_I32, colormap]
+                        p_buffer, row_stride.i32, colormap]
                   )
                 )
               )
             ).lift;
         png_imageio._check_warning_or_error("write_to_memory", res);;
-        pure $ output.get_sub(0, output_size.@(0).to_I64)
+        pure $ output.get_sub(0, output_size.@(0).i64)
     );
 
     _PNG_FORMAT_FLAG_ALPHA: I64;

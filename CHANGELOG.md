@@ -1,7 +1,7 @@
 ## 0.6.4
 ### Changed
 - Upgraded to minilib-io@0.8.5, minilib-xml@0.6.4, math@1.2.1.
-
+- Modified some code to remove the deprecation warnings.
 
 ## 0.6.2
 ### Changed

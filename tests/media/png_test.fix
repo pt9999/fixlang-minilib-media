@@ -19,11 +19,11 @@ render = |x, y| (
         let by = frac(y*12345.0);
         (x + by * 0.06, y + bx * 0.06)
     } else {            // add jitter noise
-        let bx = (x * 0x123456789ABCDE_U64.to_F64).to_U64;
-        let by = (y * 0xABC123ABC123FF_U64.to_F64).to_U64;
+        let bx = (x * 0x123456789ABCDE_U64.f64).u64;
+        let by = (y * 0xABC123ABC123FF_U64.f64).u64;
         let b = bx.bit_xor(by);
-        let bx = b.shift_right(16_U64).bit_and(0xFFFF_U64).to_F64 / 65535.0;
-        let by = b.shift_right(0_U64).bit_and(0xFFFF_U64).to_F64 / 65535.0;
+        let bx = b.shift_right(16_U64).bit_and(0xFFFF_U64).f64 / 65535.0;
+        let by = b.shift_right(0_U64).bit_and(0xFFFF_U64).f64 / 65535.0;
         (x + bx * 0.02, y + by * 0.02)
     };
     let angle = Math::atan2(y, x) / (2.0 * Math::pi64);
@@ -39,14 +39,14 @@ make_test_image: () -> Image;
 make_test_image = |_| (
     let width = 512;
     let height = 512;
-    let to_byte = |f| max(0.0, min(255.0, f * 255.0)).to_U8;
+    let to_byte = |f| max(0.0, min(255.0, f * 255.0)).u8;
     let image = Image::make(width, height, "RGB");
     let image = Iterator::range(0, height).fold(
         image, |y, image|
-        let fy = (y.to_F64 / height.to_F64) * 2.0 - 1.0;
+        let fy = (y.f64 / height.f64) * 2.0 - 1.0;
         Iterator::range(0, width).fold (
             image, |x, image|
-            let fx = (x.to_F64 / width.to_F64) * 2.0 - 1.0;
+            let fx = (x.f64 / width.f64) * 2.0 - 1.0;
             let rgb = render(fx, fy);
             let index = image.calc_index(x, y, 0);
             image.set_rgb(index, (rgb.@0.to_byte, rgb.@1.to_byte, rgb.@2.to_byte))
@@ -105,7 +105,7 @@ test_write_png_to_memory = (
     make_test("test_write_png_to_memory") $ |_|
     let image = make_test_image();
     let data = *image.write_png_to_memory;
-    assert_equal("magic_number", "PNG", data.get_sub(1, 4)._unsafe_to_string);;
+    assert_equal("magic_number", "PNG", data.get_sub(1, 4).from_array);;
     pure()
 );
 

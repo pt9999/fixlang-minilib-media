@@ -23,7 +23,7 @@ test_make = (
         assert_equal("height", height, image.@height);;
         assert_equal("channels", channels, image.@channels);;
         assert_equal("format", format, image.@format);;
-        assert_equal("data.size", width * height * channels, image.@data.get_size);;
+        assert_equal("data.size", width * height * channels, image.@data.@size);;
         pure()
     )
 );
