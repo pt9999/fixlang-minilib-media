@@ -1,3 +1,8 @@
+## 0.6.4
+### Changed
+- Upgraded to minilib-io@0.8.5, minilib-xml@0.6.4, math@1.2.1.
+
+
 ## 0.6.2
 ### Changed
 - Removed indirect dependencies.
