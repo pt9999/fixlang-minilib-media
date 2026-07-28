@@ -89,7 +89,7 @@ namespace PngImageIO {
         let res =
             *png_imageio.@dtor.borrow_io(|pv_image|
               filepath.borrow_c_str_io(|p_filepath|
-                buffer.borrow_boxed_io(|p_buffer|
+                buffer.borrow_elements_io(|p_buffer|
                     FFI_CALL_IO[CInt minilib_png_write_to_file(Ptr, Ptr, I32, Ptr, I32, Ptr),
                         pv_image, p_filepath, convert_to_8bit,
                         p_buffer, row_stride.i32, colormap]
@@ -126,9 +126,9 @@ namespace PngImageIO {
         let colormap = nullptr;
         let res =
             *png_imageio.@dtor.borrow_io(|pv_image|
-              output.borrow_boxed_io(|p_output|
-                output_size.borrow_boxed_io(|p_output_size|
-                  buffer.borrow_boxed_io(|p_buffer|
+              output.borrow_elements_io(|p_output|
+                output_size.borrow_elements_io(|p_output_size|
+                  buffer.borrow_elements_io(|p_buffer|
                     FFI_CALL_IO[CInt minilib_png_write_to_memory(Ptr, Ptr, Ptr, I32, Ptr, I32, Ptr),
                         pv_image, p_output, p_output_size, convert_to_8bit,
                         p_buffer, row_stride.i32, colormap]
