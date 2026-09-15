@@ -1,3 +1,8 @@
+## 0.7.1
+### Changed
+- Added indirect dependencies.
+- Upgraded to minilib-io@0.9.2.
+
 ## 0.7.0
 ### Changed
 - Merged PR#2 (thanks to tttmmmyyyy san).
