@@ -56,12 +56,12 @@ rev = "08920f75c90354102c15691c9777ad928b8f9c26"
 
 [[dependencies]]
 name = "minilib-xml"
-version = "0.7.0"
-path = ".fixlang/deps/minilib-xml_0.7.0"
+version = "0.7.1"
+path = ".fixlang/deps/minilib-xml_0.7.1"
 
 [dependencies.git]
 repo = "https://github.com/pt9999/fixlang-minilib-xml.git"
-rev = "aa0c8825de5cf5f259dfb2bbb28011e8c3d9f355"
+rev = "3db85d912e9de2fb2e26ddcb31c676b785ba816a"
 
 [[dependencies]]
 name = "time"
