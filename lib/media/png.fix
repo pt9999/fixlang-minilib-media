@@ -121,7 +121,7 @@ namespace PngImageIO {
     write_to_memory:  Bool -> Array U8 -> I64 -> PngImageIO -> IOFail (Array U8);
     write_to_memory = |convert_to_8bit, buffer, row_stride, png_imageio| (
         let output = Array::fill(buffer.@size * 2, 0_U8); // TODO: is it ok?
-        let output_size = Array::fill(1, output.@size.u32);
+        let output_size = Array::fill(1, output.@size.c_size_t);
         let convert_to_8bit = if convert_to_8bit { 1_I32 } else { 0_I32 };
         let colormap = nullptr;
         let res =
