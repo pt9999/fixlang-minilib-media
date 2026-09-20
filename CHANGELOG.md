@@ -1,3 +1,8 @@
+## 0.7.2
+### Fixed
+- Merged PR#3 (thanks to tttmmmyyyy san).
+  - Fixed a buffer-overflow in `PngImageIO::write_to_memory`.
+
 ## 0.7.1
 ### Changed
 - Added indirect dependencies.
