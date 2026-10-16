@@ -140,32 +140,32 @@ namespace PngImageIO {
         pure $ output.get_sub(0, output_size.@(0).i64)
     );
 
-    _PNG_FORMAT_FLAG_ALPHA: I64;
-    _PNG_FORMAT_FLAG_ALPHA = 1; /* format with an alpha channel */
-    _PNG_FORMAT_FLAG_COLOR: I64;
-    _PNG_FORMAT_FLAG_COLOR = 2; /* color format: otherwise grayscale */
-    _PNG_FORMAT_FLAG_LINEAR: I64;
-    _PNG_FORMAT_FLAG_LINEAR = 4; /* 2-byte channels else 1-byte */
-    _PNG_FORMAT_FLAG_COLORMAP: I64;
-    _PNG_FORMAT_FLAG_COLORMAP = 8; /* image data is color-mapped */
-    _PNG_FORMAT_FLAG_BGR: I64;
-    _PNG_FORMAT_FLAG_BGR = 16; /* BGR colors, else order is RGB */
-    _PNG_FORMAT_FLAG_AFIRST: I64;
-    _PNG_FORMAT_FLAG_AFIRST = 32; /* alpha channel comes first */
-    _PNG_FORMAT_FLAG_ASSOCIATED_ALPHA: I64;
-    _PNG_FORMAT_FLAG_ASSOCIATED_ALPHA = 64; /* alpha channel is associated */
+    __PNG_FORMAT_FLAG_ALPHA: I64;
+    __PNG_FORMAT_FLAG_ALPHA = 1; /* format with an alpha channel */
+    __PNG_FORMAT_FLAG_COLOR: I64;
+    __PNG_FORMAT_FLAG_COLOR = 2; /* color format: otherwise grayscale */
+    __PNG_FORMAT_FLAG_LINEAR: I64;
+    __PNG_FORMAT_FLAG_LINEAR = 4; /* 2-byte channels else 1-byte */
+    __PNG_FORMAT_FLAG_COLORMAP: I64;
+    __PNG_FORMAT_FLAG_COLORMAP = 8; /* image data is color-mapped */
+    __PNG_FORMAT_FLAG_BGR: I64;
+    __PNG_FORMAT_FLAG_BGR = 16; /* BGR colors, else order is RGB */
+    __PNG_FORMAT_FLAG_AFIRST: I64;
+    __PNG_FORMAT_FLAG_AFIRST = 32; /* alpha channel comes first */
+    __PNG_FORMAT_FLAG_ASSOCIATED_ALPHA: I64;
+    __PNG_FORMAT_FLAG_ASSOCIATED_ALPHA = 64; /* alpha channel is associated */
 
     parse_format: String -> Result ErrMsg I64;
     parse_format = |str| (
         if str == "GRAY" { ok $ 0 };
-        if str == "GA" { ok $ _PNG_FORMAT_FLAG_ALPHA };
-        if str == "AG" { ok $ _PNG_FORMAT_FLAG_ALPHA.bit_or $ _PNG_FORMAT_FLAG_AFIRST };
-        if str == "RGB" { ok $ _PNG_FORMAT_FLAG_COLOR };
-        if str == "BGR" { ok $ _PNG_FORMAT_FLAG_COLOR.bit_or $ _PNG_FORMAT_FLAG_BGR };
-        if str == "RGBA" { ok $ _PNG_FORMAT_FLAG_COLOR.bit_or $ _PNG_FORMAT_FLAG_ALPHA };
-        if str == "ARGB" { ok $ _PNG_FORMAT_FLAG_COLOR.bit_or $ _PNG_FORMAT_FLAG_ALPHA.bit_or $ _PNG_FORMAT_FLAG_AFIRST };
-        if str == "BGRA" { ok $ _PNG_FORMAT_FLAG_COLOR.bit_or $ _PNG_FORMAT_FLAG_BGR.bit_or $ _PNG_FORMAT_FLAG_ALPHA };
-        if str == "ABGR" { ok $ _PNG_FORMAT_FLAG_COLOR.bit_or $ _PNG_FORMAT_FLAG_BGR.bit_or $ _PNG_FORMAT_FLAG_ALPHA.bit_or $ _PNG_FORMAT_FLAG_AFIRST };
+        if str == "GA" { ok $ __PNG_FORMAT_FLAG_ALPHA };
+        if str == "AG" { ok $ __PNG_FORMAT_FLAG_ALPHA.bit_or $ __PNG_FORMAT_FLAG_AFIRST };
+        if str == "RGB" { ok $ __PNG_FORMAT_FLAG_COLOR };
+        if str == "BGR" { ok $ __PNG_FORMAT_FLAG_COLOR.bit_or $ __PNG_FORMAT_FLAG_BGR };
+        if str == "RGBA" { ok $ __PNG_FORMAT_FLAG_COLOR.bit_or $ __PNG_FORMAT_FLAG_ALPHA };
+        if str == "ARGB" { ok $ __PNG_FORMAT_FLAG_COLOR.bit_or $ __PNG_FORMAT_FLAG_ALPHA.bit_or $ __PNG_FORMAT_FLAG_AFIRST };
+        if str == "BGRA" { ok $ __PNG_FORMAT_FLAG_COLOR.bit_or $ __PNG_FORMAT_FLAG_BGR.bit_or $ __PNG_FORMAT_FLAG_ALPHA };
+        if str == "ABGR" { ok $ __PNG_FORMAT_FLAG_COLOR.bit_or $ __PNG_FORMAT_FLAG_BGR.bit_or $ __PNG_FORMAT_FLAG_ALPHA.bit_or $ __PNG_FORMAT_FLAG_AFIRST };
         err $ "Invalid format: " + str
     );
 }
