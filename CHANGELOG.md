@@ -1,3 +1,9 @@
+## 0.8.0
+### Changed
+- fixproj.toml: Bumped `fix_version` to 1.6.0. Depends on minilib-common@0.15.0,
+  minilib-xml@0.8.0, minilib-io@0.10.0, math@2.0.1.
+  math@2.0.1 is moved from `dependencies` to `test_dependencies`.
+
 ## 0.7.2
 ### Fixed
 - Merged PR#3 (thanks to tttmmmyyyy san).
