@@ -1,6 +1,8 @@
 // Basic image definitions.
 module Minilib.Media.Image;
 
+import Std::{Array, I64, String, U8, Array::{@, fill, set}, Debug::debug_eprintln, Tuple3::{@0, @1, @2}};
+
 
 type Image = unbox struct {
     width: I64,

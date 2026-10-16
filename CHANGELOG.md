@@ -4,6 +4,7 @@
   minilib-xml@0.8.0, minilib-io@0.10.0, math@2.0.1.
   math@2.0.1 is moved from `dependencies` to `test_dependencies`.
 - Minilib.Media.Png: Changed `_PNG_FORMAT_FLAG_ALPHA` to `__PNG_FORMAT_FLAG_ALPHA` etc.
+- Reorganized imports using `fix edit explicit-import`.
 
 ## 0.7.2
 ### Fixed

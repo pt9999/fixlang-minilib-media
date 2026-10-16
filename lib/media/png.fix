@@ -8,7 +8,15 @@
 // NOTE: Currently only writing is supported. Reading is not supported yet.
 module Minilib.Media.Png;
 
-import Minilib.Media.Image;
+import Minilib.Media.Image::{Image, Image::{@channels, @data, @format, @height, @width}};
+import Std::{
+    Array, Bool, ErrMsg, I64, Ptr, Result, String, U8, 
+    Array::{@, @size, borrow_elements_io, fill, get_sub}, 
+    FFI::{CInt, Destructor, Destructor::{borrow_io, make}}, Functor::map, I64::bit_or, 
+    IO::{eprintln, IOFail, IOFail::{from_result, lift, throw}}, Monad::pure, Result::{err, ok}, 
+    String::{borrow_c_str_io, unsafe_from_c_str_ptr_io}, ToCSizeT::c_size_t, ToI32::i32, ToI64::i64, 
+    ToString::to_string, ToU32::u32
+};
 
 write_png_file: String -> Image -> IOFail ();
 write_png_file = |filepath, image| (

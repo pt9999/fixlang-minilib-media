@@ -1,12 +1,16 @@
 module PngTest;
 
-import Math;
-
-import Minilib.Media.Image;
-import Minilib.Media.Png;
-import Minilib.IO.FileSystem;
-import Minilib.Testing.UnitTest;
-import Minilib.Text.StringEx;
+import Math::{atan2, floor, pi64, sqrt};
+import Minilib.IO.FileSystem::{file_exists, make_dirs};
+import Minilib.Media.Image::{calc_index, make, set_rgb, Image, Image::set_format};
+import Minilib.Media.Png::{write_png_file, write_png_to_memory};
+import Minilib.Testing.UnitTest::{assert_equal, make_test, run_test_driver, TestCase, TestCase::empty};
+import Minilib.Text.StringEx::from_array;
+import Std::{
+    F64, IO, Array::get_sub, IO::IOFail::{lift, to_result}, Iterator::{fold, range}, 
+    LessThan::{max, min}, Monad::pure, Option::none, Result::err, ToF64::f64, ToU64::u64, ToU8::u8, 
+    Tuple3::{@0, @1, @2}, U64::{bit_and, bit_xor, shift_right}
+};
 
 render: F64 -> F64 -> (F64, F64, F64);
 render = |x, y| (

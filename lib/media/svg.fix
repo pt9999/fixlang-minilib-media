@@ -3,8 +3,15 @@
 // This module uses `Minilib.Encoding.Xml` to handle XML.
 module Minilib.Media.Svg;
 
-import Minilib.Encoding.Xml;
-import Minilib.Text.StringEx;
+import Minilib.Encoding.Xml::{
+    XmlElement, XmlDocument::make, XmlElement::{append_child, attr, make}, XmlNode::text_node, 
+    XmlText::make
+};
+import Minilib.Text.StringEx::Format::format;
+import Std::{
+    Array, Bool, F64, I64, String, Array::to_iter, Functor::map, IO::{with_file, write_string, IOFail}, 
+    Iterator::map, String::{is_empty, join, strip_last_bytes}, ToString::to_string
+};
 
 //---------------------------------------------------------------------------
 //  SvgNum

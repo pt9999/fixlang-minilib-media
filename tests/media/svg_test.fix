@@ -1,9 +1,22 @@
 module SvgTest;
 
-import Minilib.Encoding.Xml;
-import Minilib.Media.Svg;
-import Minilib.Testing.UnitTest;
-import Minilib.Text.StringEx;
+import Minilib.Encoding.Xml::{
+    XmlElement, XmlElement::{@children, @tag_name, get_attribute, make}, XmlNode::text_node, 
+    XmlText::make
+};
+import Minilib.Media.Svg::{
+    PathData::{
+        @data, arcto, closepath, curveto, empty, lineto, moveto, newpath, quadto, rlineto, rmoveto, scurveto, 
+        squadto
+    }, 
+    Svg::{
+        attr_num, circle, ellipse, fill_, font_family, font_size, group, line, path, polygon, polyline, rect, 
+        stroke, stroke_width, svg, text, view_box, xy
+    }, 
+    SvgNum::to_attr_value
+};
+import Minilib.Testing.UnitTest::{assert_equal, make_test, run_test_driver, TestCase, TestCase::empty};
+import Std::{F64, IO, String, IO::IOFail, Monad::pure, Option::some};
 
 //=======================================================================
 // tests for SvgNum

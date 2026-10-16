@@ -1,7 +1,8 @@
 module ImageTest;
 
-import Minilib.Media.Image;
-import Minilib.Testing.UnitTest;
+import Minilib.Media.Image::{calc_index, get, get_rgb, make, set, set_rgb, Image::{@channels, @data, @format, @height, @width}};
+import Minilib.Testing.UnitTest::{assert_equal, make_table_test, run_test_driver, TestCase, TestCase::empty};
+import Std::{IO, Array::{@, @size}, Monad::pure, Tuple3::{@0, @1, @2}};
 
 test_make: TestCase;
 test_make = (
